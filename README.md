@@ -1,2 +1,6 @@
-# php-dependency-injection
-PHP Dependency Injection library in collaboration with service manager
+# Skyline Navigation Service
+
+```bin
+$ composer require skyline/navigation
+```
+
