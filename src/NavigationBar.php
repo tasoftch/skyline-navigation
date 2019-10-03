@@ -24,6 +24,7 @@
 namespace Skyline\Navigation;
 
 
+use Skyline\HTML\Bootstrap\AbstractBreakpoint;
 use TASoft\MenuService\MenuInterface;
 
 class NavigationBar implements NavigationBarInterface
@@ -42,9 +43,9 @@ class NavigationBar implements NavigationBarInterface
     private $brandItem;
 
     /**
-     * @var int
+     * @var string
      */
-    private $collapseSize = SKY_BOOTSTRAP_MD;
+    private $collapseSize = AbstractBreakpoint::BREAKPOINT_MEDIUM;
 
     /**
      * NavigationBar constructor.
@@ -113,17 +114,17 @@ class NavigationBar implements NavigationBarInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getCollapseSize(): int
+    public function getCollapseSize(): string
     {
         return $this->collapseSize;
     }
 
     /**
-     * @param int $collapseSize
+     * @param string $collapseSize
      */
-    public function setCollapseSize(int $collapseSize): void
+    public function setCollapseSize(string $collapseSize): void
     {
         $this->collapseSize = $collapseSize;
     }

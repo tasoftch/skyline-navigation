@@ -57,9 +57,9 @@ interface NavigationBarInterface
     /**
      * Gets the breakpoint, when the navbar should collapse
      *
-     * @return int
+     * @return string
      */
-    public function getCollapseSize(): int;
+    public function getCollapseSize(): string;
 
     /**
      * Define the brand to display. Return null to skip branding
