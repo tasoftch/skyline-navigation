@@ -1,0 +1,88 @@
+<?php
+
+use Skyline\HTML\Bootstrap\Size;
+use Skyline\Navigation\NavigationBarInterface;
+use Skyline\Render\Context\DefaultRenderContext;
+
+/**
+ * @var DefaultRenderContext $this
+ * @var NavigationBarInterface $navBar
+ */
+
+$navBar = $this->getAdditionalInfo()[0];
+$tmpCallback = $this->getAdditionalInfo()[1];
+
+$nbi = uniqid("nb_");
+$brand = $navBar->getBrandItem();
+
+$cs = $navBar->getCollapseSize();
+$css = (new Size(Size::NORMAL))
+->addSize(1, $cs)
+->getCSS("navbar-expand-%x");
+
+?>
+<nav class="navbar <?=$css?> <?=implode(" ", $navBar->getCSSClasses())?>">
+    <div class="container">
+        <?php
+        if($brand) {
+            if($url = $brand->getURL()) {
+                if($icon = $brand->getIconURL()) {
+                    ?>
+                    <a class="navbar-brand" href="<?=$brand->getURL()?>">
+                        <img src="<?=$icon?>" width="30" height="30" class="d-inline-block align-top" alt="">
+                        <?=$brand->getName()?>
+                    </a>
+                    <?php
+                } else {
+                    ?>
+                    <a class="navbar-brand" href="<?=$brand->getURL()?>"><?=$brand->getName()?></a>
+                    <?php
+                }
+            } else {
+                if($icon = $brand->getIconURL()) {
+                    ?>
+                    <span class="navbar-brand mb-0 h1">
+                    <img src="<?=$icon?>" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <?=$brand->getName()?>
+                </span>
+                    <?php
+                } else {
+                    ?>
+                    <span class="navbar-brand mb-0 h1"><?=$brand->getName()?></span>
+                    <?php
+                }
+            }
+        } else {
+            $css = (new Size(Size::NORMAL))
+                ->addSize(1, $cs)
+                ->getCSS("d-%x-none");
+            ?>
+            <span class="navbar-brand mb-0 h1 <?=$css?>"> </span>
+            <?php
+        }
+        ?>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#<?=$nbi?>" aria-controls="<?=$nbi?>" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="<?=$nbi?>">
+            <ul class="navbar-nav mr-auto">
+                <?php
+                $itemTpl = NULL;
+                $itemWithSubTpl = NULL;
+
+                foreach($navBar->getMainMenu()->getMenuItems() as $menuItem) {
+                    if($menuItem->getSubmenu()) {
+                        $tpl = $itemWithSubTpl ? $itemWithSubTpl : ($itemWithSubTpl = $tmpCallback('item-with-submenu'));
+                    } else {
+                        $tpl = $itemTpl ? $itemTpl : ($itemTpl = $tmpCallback('item'));
+                    }
+
+                    $this->renderSubTemplate($tpl, [$menuItem, $tmpCallback]);
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
+
+</nav>
