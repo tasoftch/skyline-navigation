@@ -22,6 +22,10 @@
     "ext-simplexml": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6"
+    "phpunit/phpunit": "^6",
+    "skyline/component-bootstrap": "dev-master"
+  },
+  "suggest": {
+    "skyline/component-bootstrap": "Using internal navigation templates need the bootstrap component"
   }
 }
