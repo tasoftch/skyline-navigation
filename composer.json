@@ -19,7 +19,6 @@
     "skyline/render": "dev-master",
     "tasoft/menu-service": "dev-master",
     "tasoft/tools-path": "dev-master",
-    "skyline/component-bootstrap": "dev-master",
     "ext-simplexml": "*"
   },
   "require-dev": {
