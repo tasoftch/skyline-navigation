@@ -30,7 +30,7 @@ use Skyline\Navigation\Loader\XMLLoader;
 use Skyline\Render\Info\RenderInfoInterface;
 use Skyline\Render\RenderInterface;
 use Skyline\Render\Service\TemplateControllerInterface;
-use Skyline\Render\Template\Catalog;
+use Skyline\Render\Specification\Catalog;
 use Skyline\Render\Template\TemplateInterface;
 use TASoft\MenuService\MenuTool;
 use TASoft\Service\Exception\UnknownServiceException;
