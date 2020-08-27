@@ -24,7 +24,9 @@
 namespace Skyline\Navigation;
 
 
+use Skyline\Translation\TranslationManager;
 use TASoft\MenuService\MenuItem;
+use TASoft\Service\ServiceManager;
 
 class NavigationBarItem extends MenuItem
 {
@@ -32,7 +34,21 @@ class NavigationBarItem extends MenuItem
 
     public static $screenReaderCurrentMarker = '<span class="sr-only">(current)</span>';
 
-    /**
+    public function __construct(string $identifier, string $title = "")
+	{
+		if($title && class_exists( TranslationManager::class )) {
+			/** @var TranslationManager $tm */
+			if($tm = ServiceManager::generalServiceManager()->get( TranslationManager::SERVICE_NAME )) {
+				$t = $tm->translateGlobal($identifier, 'menu');
+				if($t != $identifier)
+					$title = $t;
+			}
+
+		}
+		parent::__construct($identifier, $title);
+	}
+
+	/**
      * @return bool
      */
     public function isSeparatorItem(): bool
@@ -40,11 +56,13 @@ class NavigationBarItem extends MenuItem
         return $this->separatorItem;
     }
 
-    /**
-     * @param bool $separatorItem
-     */
-    public function setSeparatorItem(bool $separatorItem): void
+	/**
+	 * @param bool $separatorItem
+	 * @return NavigationBarItem
+	 */
+    public function setSeparatorItem(bool $separatorItem)
     {
         $this->separatorItem = $separatorItem;
+        return $this;
     }
 }
