@@ -13,15 +13,15 @@
     }
   },
   "require" : {
-    "php": "^7.2",
+    "php": "^8",
     "tasoft/service-manager": "^2.2",
-    "skyline/render": "^0.8",
-    "tasoft/menu-service": "^0.9",
+    "skyline/render": "^8",
+    "tasoft/menu-service": "^8",
     "tasoft/tools-path": "^1.5",
     "ext-simplexml": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6",
+    "phpunit/phpunit": "^9",
     "skyline/component-bootstrap": "^4.3"
   },
   "suggest": {
